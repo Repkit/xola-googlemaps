@@ -12,6 +12,8 @@ A Screenshot
 
 ## Todo 
 
+* Filter by category (Trekking, Hiking, Road Climbing etc.)
+* Better Icons, or icons per category
 * If you're in the US, request your location and focus the maps on your state.
 * Add more details of each experience, photos, pricing etc in a lower window.
 
