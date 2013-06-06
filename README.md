@@ -8,7 +8,7 @@ A [demo](http://rushi.vishavadia.com/xola-googlemaps/) is available [here](http:
 
 A Screenshot
 
-![Screenshot](https://bitbucket.org/rushi/xola-googlemaps/raw/39a0c915c10b619757ec374ff9e679cf7d2c5414/screenshot.png)
+![Screenshot](https://bitbucket.org/rushi/xola-googlemaps/raw/master/screenshot.png)
 
 ## Todo 
 
