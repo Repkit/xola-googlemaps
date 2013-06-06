@@ -26,9 +26,9 @@ var app = app || {};
             app.Experiences.fetch();
 
             // For our experiences, let's plot them on the map
-            setTimeout(function() {
+            google.maps.event.addListenerOnce(this.map, 'idle', function(){
                 var experience_view = new app.ExperienceListView({model: app.Experiences, map: _this.map});
-            }, 1000);
+            });
         }
     });
 })(jQuery);
