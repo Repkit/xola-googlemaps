@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,600,700">
 
     <script src="js/lib/jquery.min.js"></script>
     <script src="js/lib/underscore-min.js"></script>
@@ -29,6 +30,21 @@
     <section id="main">
         <!-- Data about each experience should go here -->
     </section>
+
+    <script type="text/template" id="marker_info">
+    <div class="marker-wrapper">
+        <h3><%= name %></h3>
+        <p class='excerpt'><%= excerpt %></p>
+        <div class='desc-wrapper'>
+            <img src='http://xola.com<%= photo.src %>' width='200' class='desc-img' />
+            <p class='desc'><%= desc %></p>
+        </div>
+        <div class='misc'>
+            <p>Price: <%= currency %> <%= price %></p>
+            <p>Category: <%= category %></p>
+        </div>
+    </div>
+    </script>
 
     <script src="js/app/models/experience.js"></script>
     <script src="js/app/collections/experiences.js"></script>

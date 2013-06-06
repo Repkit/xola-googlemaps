@@ -34,9 +34,9 @@ var app = app || {};
                 id : obj.get('id')
             });
 
+            var _tpl = _.template($("#marker_info").html());
             this.marker.InfoWindow = new google.maps.InfoWindow({
-                content: "<h3>" + obj.get('name') + "</h3><p><em>" + obj.get('excerpt').replace(/\n/, "<br>") + "</em></p>" +
-                obj.get('desc').replace(/\n/, "<br>")
+                content: _tpl(obj.toJSON())
             });
 
             // google.maps.event.addListener(this.marker, 'mouseover', this.show_info);

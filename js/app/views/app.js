@@ -9,7 +9,7 @@ var app = app || {};
         initialize: function() {
             var styles = [{
                 elementType: "geometry",
-                stylers: [{ lightness: 33 }, { saturation: -30 }]
+                stylers: [{ lightness: 23 }, { saturation: -10 }]
             }];
 
             var options = {
