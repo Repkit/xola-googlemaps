@@ -4,6 +4,56 @@ var app = app || {};
 
     app.ExperienceListView = Backbone.View.extend({
 
+        marker_img : {
+            'River Rafting' : 'waterpark.png',
+            'Trekking / Hiking' : 'hiking.png',
+            'Kayaking & Canoeing' : 'kayaking.png',
+            'Fly Fishing' : 'fishing.png',
+            'Food & Wine' : 'restaurant.png',
+            "Sailing" : 'sailing.png',
+            'Cycling & Mountain Biking' : 'cycling.png',
+            "Deep Sea Fishing": 'deepseafishing.png', 
+            "Guide School": 'walkingtour.png', 
+            "River Tubing ": '', 
+            "Safety Training": '', 
+            "Team Building": '', 
+            "Bungee Jumping": '', 
+            "Caving / Spelunking": 'spelunking.png', 
+            "River Cruises": 'cruiseship.png', 
+            "Skydiving": 'diving.png', 
+            "Surfing": 'surfing.png', 
+            "Website Creation": '', 
+            "Lake Fishing": 'fishing.png', 
+            "Parachuting": 'paragliding.png', 
+            "Paragliding": 'paragliding.png', 
+            "Mountaineering": 'mountains.png', 
+            "Aerial Tours": 'helicopter.png', 
+            "Creative Classes": '', 
+            "Snowshoeing": 'snowshoeing.png', 
+            "Windsurfing & Kitesurfing": 'kitesurfing.png', 
+            "Art & Architecture": '', 
+            "Birdwatching": 'birds-2.png', 
+            "Hang Gliding ": 'hanggliding.png', 
+            "Wilderness Training": '', 
+            "Ballooning": 'hotairbaloon.png', 
+            "Walking Tours": 'walkingtour.png', 
+            "Backpacking/Camping": 'camping-2.png', 
+            "Culture & History": '', 
+            "Eco-Tour/Hike": '', 
+            "Marine Wildlife": '', 
+            "Snowmobiling": 'snowmobiling.png', 
+            "Wakeboarding": 'boardercross.png', 
+            "Zip-lining": '', 
+            "Beer Tour": 'beergarden.png', 
+            "Photography": 'photography.png', 
+            "Snowkiting": 'snowboarding.png', 
+            "Stand Up Paddle (SUP)": 'surfpaddle.png', 
+            "Off-road": 'atv.png', 
+            "Helicopter Tours": 'helicopter.png', 
+            "Horseback Riding": 'horseriding.png', 
+            "Rock Climbing": 'climbing.png'
+        },
+
         initialize: function(opts) {
             this.map = opts.map;
             this.model = opts.model;
@@ -26,10 +76,14 @@ var app = app || {};
 
         renderMarker: function(obj) {
             var that = this;
+
+            var current_marker_img = this.marker_img[obj.get('category')] ? 'images/markers/' + this.marker_img[obj.get('category')] : '';
+            console.log(current_marker_img);
             var marker = new google.maps.Marker({
                 map: that.map,
                 experience: obj,
                 experienceView: '',
+                icon: current_marker_img,
                 position: new google.maps.LatLng(obj.get('geo').lat, obj.get('geo').lng),
                 title: obj.get('name'),
                 descr : obj.get('excerpt'),
