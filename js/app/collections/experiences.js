@@ -7,7 +7,7 @@ var app = app || {};
 
         // localStorage: new Backbone.LocalStorage('xola-maps'),
        
-        // TODO: Catch data in localStorage
+        // TODO: Cache data in localStorage
         fetch: function() {
             var collection = this;
             $.getJSON('experiences.json', function(data) {

@@ -42,17 +42,47 @@
         <div class='misc'>
             <p>Price: <%= currency %> <%= price %></p>
             <p>Category: <%= category %></p>
+            <!-- <div style='float:right;'>
+                <a href='#'>See More through pictures</a>
+            </div> -->
         </div>
     </div>
     </script>
 
+    <section id="explore">
+    </section>
+
+    <script type='text/template' id='explore_markup'>
+        <div class='explore_wrapper <%= className %>'>
+            <button class="explore_btn closed" id="explore_btn">
+                <label class="explore_label">See More</label>
+                <div class='expander-sprite'></div>
+            </button>
+            <div class="explore_panel closed" id="explore-panel">
+                <div class="explore-panel-container">
+                    <div class='img-container'></div>
+                    <div class='clear'></div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type='text/template' id='panel_img'>
+        <div class='explore-img'>
+            <img src='<%= panel_img %>' />
+        </div>
+    </script>
+
     <script src="js/app/models/experience.js"></script>
     <script src="js/app/collections/experiences.js"></script>
+    <script src="js/app/views/explore.js"></script>
     <script src="js/app/views/app.js"></script>
     <script src="js/app/views/experience_list.js"></script>
     <script src="js/app/router.js"></script>
     <script src="js/app/app.js"></script>
 
     <div id="map_canvas"></div>
+
+    <script src="js/lib/jqueryui/jquery-ui-1.10.3.custom.min.js"></script>
 </body>
 </html>

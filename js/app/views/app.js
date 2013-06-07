@@ -2,11 +2,18 @@ var app = app || {};
 
 (function($){
 
-    // var Experiences = new app.Experiences();
     app.AppView = Backbone.View.extend({
         el: $("#controls_container"),
 
         initialize: function() {
+
+            $("#explore_btn").hide();
+            $("#explore-panel").hide();
+
+            var _this = this;
+            app.Experiences.fetch();
+
+            // Let's setup the map
             var styles = [{
                 elementType: "geometry",
                 stylers: [{ lightness: 23 }, { saturation: -10 }]
@@ -21,11 +28,8 @@ var app = app || {};
 
             this.map = new google.maps.Map(document.getElementById('map_canvas'), options); // use of $ doesnt work
 
-            // Need to wait for the map to load before we plot our experiences
-            var _this = this;
-            app.Experiences.fetch();
-
             // For our experiences, let's plot them on the map
+            // TODO, also wait till Experiences.fetch() is completed
             google.maps.event.addListenerOnce(this.map, 'idle', function(){
                 var experience_view = new app.ExperienceListView({model: app.Experiences, map: _this.map});
             });
