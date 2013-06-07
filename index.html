@@ -40,11 +40,14 @@
             <p class='desc'><%= desc %></p>
         </div>
         <div class='misc'>
-            <p>Price: <%= currency %> <%= price %></p>
-            <p>Category: <%= category %></p>
-            <!-- <div style='float:right;'>
-                <a href='#'>See More through pictures</a>
-            </div> -->
+            <div class='lhs'>
+                <p>Price: <%= currency %> <%= price %></p>
+                <p>Category: <%= category %></p>
+            </div>
+            <div class='rhs'>
+                <a class='xola-custom' target="_blank" href="http://xola.com/#!show/<%= id %>">BOOK NOW!</a>
+            </div>
+            <div class='clear'></div>
         </div>
     </div>
     </script>

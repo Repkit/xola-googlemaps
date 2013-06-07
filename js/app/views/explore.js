@@ -23,12 +23,11 @@ var app = app || {};
         render: function() {
             this.$el.html(this.wrapper({className: this.className}));
             
-            var _tmp_class = "." + this.className; console.debug(_tmp_class);
+            var _tmp_class = "." + this.className;
             this.$explore = this.$(_tmp_class + ' .explore_btn');
             this.$explore_panel = this.$(_tmp_class+ ' .explore_panel');
-            this.load_photos();
+            this.load_photos(); // Start pre-loading photos
             
-            //$('.img-container').html('');
             return this;
         },
 
@@ -43,6 +42,7 @@ var app = app || {};
             this.$explore.removeClass('open').addClass('closed');
             this.$explore_panel.removeClass('open').addClass('closed');
             this.$explore_panel.fadeOut();
+            this.$explore.css("bottom", "");
         },
 
         load_photos: function() {
@@ -61,8 +61,11 @@ var app = app || {};
                 totalWidth += k.clientWidth + 1;
             });
 
-            if (totalWidth > this.medias.length)
+            if (totalWidth > $("#explore").width()) {
                 $("#explore-panel .explore-panel-container .img-container").width(totalWidth * 1.5);
+            }
+
+            this.$explore.css("bottom", $("#explore-panel").height());
         }
     });
 })(jQuery);
