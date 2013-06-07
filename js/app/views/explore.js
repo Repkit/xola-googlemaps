@@ -47,9 +47,12 @@ var app = app || {};
 
         load_photos: function() {
             var compiled_template = _.template($("#panel_img").html());
+            var that = this;
             _.each(this.medias, function(k,v) {
                 if (k.type == "photo") {
-                    var panel_html = compiled_template({panel_img: 'http://xola.com' + k.src});
+                    var extn = k.src.match(/\.\w+$/);
+                    var cache_img = 'http://xola.com/experiences/' + that.className + '/medias/' + k.id + "?width=260&height=200";
+                    var panel_html = compiled_template({panel_img: cache_img});
                     $('.img-container').append(panel_html);
                 }
             });

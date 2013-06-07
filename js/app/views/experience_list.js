@@ -5,53 +5,53 @@ var app = app || {};
     app.ExperienceListView = Backbone.View.extend({
 
         marker_img : {
-            'River Rafting' : 'waterpark.png',
-            'Trekking / Hiking' : 'hiking.png',
-            'Kayaking & Canoeing' : 'kayaking.png',
-            'Fly Fishing' : 'fishing.png',
-            'Food & Wine' : 'restaurant.png',
-            "Sailing" : 'sailing.png',
-            'Cycling & Mountain Biking' : 'cycling.png',
-            "Deep Sea Fishing": 'deepseafishing.png', 
-            "Guide School": 'walkingtour.png', 
+            'River Rafting' : 'waterpark',
+            'Trekking / Hiking' : 'hiking',
+            'Kayaking & Canoeing' : 'kayaking',
+            'Fly Fishing' : 'fishing',
+            'Food & Wine' : 'restaurant',
+            "Sailing" : 'sailing',
+            'Cycling & Mountain Biking' : 'cycling',
+            "Deep Sea Fishing": 'deepseafishing', 
+            "Guide School": 'walkingtour', 
             "River Tubing ": '', 
             "Safety Training": '', 
             "Team Building": '', 
             "Bungee Jumping": '', 
-            "Caving / Spelunking": 'spelunking.png', 
-            "River Cruises": 'cruiseship.png', 
-            "Skydiving": 'diving.png', 
-            "Surfing": 'surfing.png', 
+            "Caving / Spelunking": 'spelunking', 
+            "River Cruises": 'cruiseship', 
+            "Skydiving": 'diving', 
+            "Surfing": 'surfing', 
             "Website Creation": '', 
-            "Lake Fishing": 'fishing.png', 
-            "Parachuting": 'paragliding.png', 
-            "Paragliding": 'paragliding.png', 
-            "Mountaineering": 'mountains.png', 
-            "Aerial Tours": 'helicopter.png', 
+            "Lake Fishing": 'fishing', 
+            "Parachuting": 'paragliding', 
+            "Paragliding": 'paragliding', 
+            "Mountaineering": 'mountains', 
+            "Aerial Tours": 'helicopter', 
             "Creative Classes": '', 
-            "Snowshoeing": 'snowshoeing.png', 
-            "Windsurfing & Kitesurfing": 'kitesurfing.png', 
+            "Snowshoeing": 'snowshoeing', 
+            "Windsurfing & Kitesurfing": 'kitesurfing', 
             "Art & Architecture": '', 
-            "Birdwatching": 'birds-2.png', 
-            "Hang Gliding ": 'hanggliding.png', 
+            "Birdwatching": 'birds-2', 
+            "Hang Gliding ": 'hanggliding', 
             "Wilderness Training": '', 
-            "Ballooning": 'hotairbaloon.png', 
-            "Walking Tours": 'walkingtour.png', 
-            "Backpacking/Camping": 'camping-2.png', 
+            "Ballooning": 'hotairbaloon', 
+            "Walking Tours": 'walkingtour', 
+            "Backpacking/Camping": 'camping-2', 
             "Culture & History": '', 
             "Eco-Tour/Hike": '', 
             "Marine Wildlife": '', 
-            "Snowmobiling": 'snowmobiling.png', 
-            "Wakeboarding": 'boardercross.png', 
-            "Zip-lining": '', 
-            "Beer Tour": 'beergarden.png', 
-            "Photography": 'photography.png', 
-            "Snowkiting": 'snowboarding.png', 
-            "Stand Up Paddle (SUP)": 'surfpaddle.png', 
-            "Off-road": 'atv.png', 
-            "Helicopter Tours": 'helicopter.png', 
-            "Horseback Riding": 'horseriding.png', 
-            "Rock Climbing": 'climbing.png'
+            "Snowmobiling": 'snowmobiling', 
+            "Wakeboarding": 'boardercross', 
+            "Zip-lining": 'ziplining', 
+            "Beer Tour": 'beergarden', 
+            "Photography": 'photography', 
+            "Snowkiting": 'snowboarding', 
+            "Stand Up Paddle (SUP)": 'surfpaddle', 
+            "Off-road": 'atv', 
+            "Helicopter Tours": 'helicopter', 
+            "Horseback Riding": 'horseriding', 
+            "Rock Climbing": 'climbing'
         },
 
         initialize: function(opts) {
@@ -77,8 +77,8 @@ var app = app || {};
         renderMarker: function(obj) {
             var that = this;
 
-            var current_marker_img = this.marker_img[obj.get('category')] ? 'images/markers/' + this.marker_img[obj.get('category')] : '';
-            console.log(current_marker_img);
+            var current_marker_img = this.marker_img[obj.get('category')] ? this.marker_img[obj.get('category')] : 'blank';
+            current_marker_img = 'images/markers/' + current_marker_img + ".png?r=3";
             var marker = new google.maps.Marker({
                 map: that.map,
                 experience: obj,
@@ -91,8 +91,11 @@ var app = app || {};
             });
 
             var _tpl = _.template($("#marker_info").html());
+            var cache_img = 'http://xola.com/experiences/' + obj.get('id') + '/medias/' + obj.get('photo').id + '?width=260&height=200';
+            var jsonObj = obj.toJSON();
+            jsonObj['cache_img'] = cache_img;
             marker.InfoWindow = new google.maps.InfoWindow({
-                content: _tpl(obj.toJSON())
+                content: _tpl(jsonObj)
             });
 
             // google.maps.event.addListener(this.marker, 'mouseover', this.show_info);
