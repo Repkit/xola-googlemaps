@@ -21,7 +21,17 @@ var app = app || {};
             var options = {
                 zoom: 5,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
-                center: new google.maps.LatLng(37.472024, -96.183594),
+                center: new google.maps.LatLng(38.472024, -96.183594), // Top/Bottom, Left/Right
+                disableDefaultUI: true,
+                zoomControl: true,
+                mapTypeControl: true,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.DEFAULT,
+                    position: google.maps.ControlPosition.TOP_RIGHT
+                },
+                mapTypeControlOptions: {
+                    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                },
                 styles: styles
             };
 

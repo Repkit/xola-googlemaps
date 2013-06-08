@@ -76,7 +76,7 @@ body {
     width: 113px;
     position: absolute;
     right: 0;
-    bottom: 10px;
+    bottom: 25px;
     font-family: Roboto, Arial, sans-serif;
     z-index: 1;
     background-color: white;
@@ -115,6 +115,23 @@ body {
     background-position: -15px -15px;
 }
 
+@media (max-device-width: 480px) {  
+
+    #explore_btn {
+        height: 70px;
+        width: 170px;
+        bottom: 40px;
+    }
+
+    #explore_btn label {
+        font-size: 22px;
+    }
+
+    #explore .expander-sprite {
+        display: none;
+    }
+}
+
 #explore_panel {
     height: 0px;
     width: 100%;
@@ -145,6 +162,7 @@ body {
 
 .explore-img img {
     height: 200px;
+    min-width: 260px;
     box-shadow: 1px 1px 2px #777;
     border: 1px solid #ddd;
     cursor: pointer;
