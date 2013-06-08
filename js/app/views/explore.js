@@ -6,8 +6,8 @@ var app = app || {};
         wrapper: _.template($("#explore_markup").html()),
 
         events: {
-            'click .explore_btn.closed' : 'explore_open',
-            'click .explore_btn.open' : 'explore_closed'
+            'click .explore_btn.closed' : 'open_panel',
+            'click .explore_btn.open' : 'close_panel'
         },
 
         initialize: function() {
@@ -31,17 +31,25 @@ var app = app || {};
             return this;
         },
 
-        explore_open: function(e) {
+        open_panel: function(e) {
+            var _this = this;
+            
+            this.$explore_panel.animate({height: "240px"});
+            this.$explore.hide();
+
             this.$explore.addClass('open').removeClass('closed');
             this.$explore_panel.addClass('open').removeClass('closed');
-            this.$explore_panel.fadeIn('800');
+
+            this.$explore.css('bottom', 240);
+            this.$explore.fadeIn();
+
             this.show_photos();
         },
 
-        explore_closed: function(e) {
+        close_panel: function(e) {
             this.$explore.removeClass('open').addClass('closed');
             this.$explore_panel.removeClass('open').addClass('closed');
-            this.$explore_panel.fadeOut();
+            this.$explore_panel.animate({height: "0px"});
             this.$explore.css("bottom", "");
         },
 
@@ -68,7 +76,8 @@ var app = app || {};
                 $("#explore-panel .explore-panel-container .img-container").width(totalWidth * 1.5);
             }
 
-            this.$explore.css("bottom", $("#explore-panel").height());
+            if (this.$explore_panel.height() > 0)
+                this.$explore.css("bottom", this.$explore_panel.height());
         }
     });
 })(jQuery);

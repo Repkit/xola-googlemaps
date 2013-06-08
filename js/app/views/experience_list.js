@@ -123,7 +123,7 @@ var app = app || {};
         hide_info: function() {
             $("#explore_btn").fadeOut();
             if (this.experienceView) {
-                this.experienceView.explore_closed(this);
+                this.experienceView.close_panel(this);
                 this.experienceView.undelegateEvents();
             }
         },
