@@ -25,7 +25,7 @@ var app = app || {};
         all: function() {
             // We're interested in places that have pictures and a geo location
             return this.filter(function(t) {
-                return t.get('photo') && t.get('geo');
+                return t.get('photo') && t.get('geo') && t.get('status') == 1;
             });
         },
 
