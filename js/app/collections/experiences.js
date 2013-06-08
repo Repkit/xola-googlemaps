@@ -10,7 +10,7 @@ var app = app || {};
         // TODO: Cache data in localStorage
         fetch: function() {
             var collection = this;
-            $.getJSON('experiences.json', function(data) {
+            return $.getJSON('experiences.json', function(data) {
                 var valid_experiences = [];
                 $.each(data, function(k, v) {
                     if (v.photo && v.geo) {

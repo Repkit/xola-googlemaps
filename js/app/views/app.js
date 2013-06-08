@@ -8,7 +8,7 @@ var app = app || {};
         initialize: function() {
 
             $("#explore_btn").hide();
-            $("#explore-panel").hide();
+            $("#explore_panel").hide();
 
             var _this = this;
             app.Experiences.fetch();

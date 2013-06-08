@@ -89,7 +89,7 @@ var app = app || {};
             });
 
             if (totalWidth > $("#explore").width()) {
-                $("#explore-panel .explore-panel-container .img-container").width(totalWidth * 1.5);
+                $("#explore_panel .explore_panel_container .img-container").width(totalWidth * 1.5);
             }
 
             if (this.$explore_panel.height() > 0) {

@@ -110,7 +110,7 @@ var app = app || {};
 
         show_info: function() {
             $("#explore_btn").hide();
-            $("#explore-panel").hide();
+            $("#explore_panel").hide();
 
             this.InfoWindow.open(this.map, this);
             this.experienceView = new app.ExploreView({el: $('#explore'), e: this.experience});

@@ -103,7 +103,7 @@ body {
     background-position: -15px -15px;
 }
 
-#explore-panel {
+#explore_panel {
     height: 0px;
     width: 100%;
     background-color: white;
@@ -120,7 +120,7 @@ body {
     border-top: 2px solid white;
 }
 
-#explore-panel .explore-panel-container {
+#explore_panel .explore_panel_container {
     margin: 10px;
     padding-bottom: 5px;
     overflow: auto;
