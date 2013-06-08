@@ -58,11 +58,14 @@ var app = app || {};
             var txt = encodeURIComponent($("#search_txt").val());
             var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + txt + "&sensor=false";
 
+            ga('send', {'hitType': 'event', 'eventCategory': 'search', 'eventAction': 'click','eventLabel': txt});
+
             var _this = this;
             $.getJSON(url, function(data) {
                 // console.info(data);
                 var loc = data.results[0].geometry.location;
                 var formatted_address = data.results[0].formatted_address;
+                ga('send', {'hitType': 'event', 'eventCategory': 'search', 'eventAction': 'success','eventLabel': formatted_address});
                 // console.info(loc, formatted_address);
                 _this.map.setCenter(new google.maps.LatLng(loc.lat, loc.lng));
                 _this.map.setZoom(9);
