@@ -37,6 +37,21 @@
     </div>
     </script>
 
+    <div id="large_img">
+    </div>
+
+    <script type="text/template" id="large_img_markup">
+        <div class='large_img_wrapper'>
+            <img src='<%= img_original %>' />
+            <% if (caption != "") { %>
+            <div class='caption'>
+                <%= caption %>
+            </div>
+            <% } %>
+        </div>
+        <div class='close_btn'></div>
+    </script>
+
     <section id="explore">
     </section>
 
@@ -57,13 +72,14 @@
 
     <script type='text/template' id='panel_img'>
         <div class='explore-img'>
-            <img src='<%= panel_img %>' />
+            <img id='img_<%= img_id %>' title='<%= caption %>' data-experience-id="<%= exp_id %>" data-original-url="<%= original_url %>" src='<%= panel_img %>' />
         </div>
     </script>
 
     <script src="js/app/models/experience.js"></script>
     <script src="js/app/collections/experiences.js"></script>
     <script src="js/app/views/explore.js"></script>
+    <script src="js/app/views/experience_image.js"></script>
     <script src="js/app/views/app.js"></script>
     <script src="js/app/views/experience_list.js"></script>
     <script src="js/app/router.js"></script>

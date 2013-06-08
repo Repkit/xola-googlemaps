@@ -139,7 +139,44 @@ body {
 }
 
 .explore-img img:hover {
-    box-shadow: 1px 1px 2px #222;
+    border: 1px solid #bbb;
+    box-shadow: 1px 1px 2px #000;
+}
+
+#large_img {
+    display: none;
+    background-color: #222;
+}
+
+#large_img .large_img_wrapper {
+    margin: 0 auto;
+}
+
+#large_img .large_img_wrapper .caption {
+    font-family: Roboto, Helvetica, sans-serif;
+    position: relative;
+    top: -43px;
+    color: #fff;
+    background-color: #222;
+    padding: 10px;
+    opacity: 0.8;
+    width: 99%;
+}
+
+.close_btn {
+    background: transparent url("../images/close_48.png") no-repeat;
+    cursor: pointer;
+    height: 48px;
+    width: 48px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    display: block;
+}
+
+.close_btn:hover {
+    top: 11px;
 }
 
 .xola-custom {

@@ -7,7 +7,8 @@ var app = app || {};
 
         events: {
             'click .explore_btn.closed' : 'open_panel',
-            'click .explore_btn.open' : 'close_panel'
+            'click .explore_btn.open' : 'close_panel',
+            'click .img-container img' : 'img_click',
         },
 
         initialize: function() {
@@ -16,6 +17,7 @@ var app = app || {};
             this.experience = this.options.e;
             this.medias = this.experience.get('medias');
             this.className = this.experience.get('id');
+            this.eiv = new app.ExperienceImageView({el: $('#large_img')}); // initialize
             
             return this.render();
         },
@@ -44,6 +46,9 @@ var app = app || {};
             this.$explore.fadeIn();
 
             this.show_photos();
+            setTimeout(function() {
+                _this.eiv.resize();
+            }, 1000);
         },
 
         close_panel: function(e) {
@@ -51,6 +56,11 @@ var app = app || {};
             this.$explore_panel.removeClass('open').addClass('closed');
             this.$explore_panel.animate({height: "0px"});
             this.$explore.css("bottom", "");
+
+            var _this = this;
+            setTimeout(function() {
+                _this.eiv.resize();
+            }, 1000);
         },
 
         load_photos: function() {
@@ -60,7 +70,13 @@ var app = app || {};
                 if (k.type == "photo") {
                     var extn = k.src.match(/\.\w+$/);
                     var cache_img = 'http://xola.com/experiences/' + that.className + '/medias/' + k.id + "?width=260&height=200";
-                    var panel_html = compiled_template({panel_img: cache_img});
+                    var panel_html = compiled_template({
+                        exp_id: that.className, 
+                        img_id: k.id, 
+                        original_url: k.src,
+                        panel_img: cache_img,
+                        caption: k.caption || ''
+                    });
                     $('.img-container').append(panel_html);
                 }
             });
@@ -76,8 +92,18 @@ var app = app || {};
                 $("#explore-panel .explore-panel-container .img-container").width(totalWidth * 1.5);
             }
 
-            if (this.$explore_panel.height() > 0)
+            if (this.$explore_panel.height() > 0) {
                 this.$explore.css("bottom", this.$explore_panel.height());
-        }
+            }
+        },
+
+        img_click: function(e) {
+            // console.info(e.currentTarget.src, e.currentTarget.id);
+            
+            var elem = $("#" + e.currentTarget.id);
+            var large_img = "http://xola.com" + elem.attr('data-original-url');
+            var large_img_caption = elem.attr('title');
+            this.eiv.render(large_img, large_img_caption);
+        },
     });
 })(jQuery);

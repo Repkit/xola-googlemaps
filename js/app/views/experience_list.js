@@ -116,7 +116,7 @@ var app = app || {};
             this.experienceView = new app.ExploreView({el: $('#explore'), e: this.experience});
 
             // Init the lightbox checkout out flow
-            console.log('Init Xola Checkout XDM');
+            // console.log('Init Xola Checkout XDM');
             xola.init();
         },
 
