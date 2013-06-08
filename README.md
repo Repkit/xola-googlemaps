@@ -4,7 +4,7 @@
 
 This project plots Xola's Experiences onto Google Maps, allowing you to see the various experiences availaible to you. This fetches the list of experiences from xola.com and uses that as a source to plot against a full-scale USA map.
 
-A [demo](http://rushi.vishavadia.com/xola-googlemaps/) is available [here](http://rushi.vishavadia.com/xola-googlemaps/)
+A demo is [available here](http://rushi.vishavadia.com/xola-googlemaps/).
 
 A Screenshot
 
@@ -13,13 +13,15 @@ A Screenshot
 ## Todo 
 
 * Filter by category (Trekking, Hiking, Road Climbing etc.)
-* Better Icons, or icons per category
+* Better Icons, or icons per category *(DONE)*
 * If you're in the US, request your location and focus the maps on your state.
-* Add more details of each experience, photos, pricing etc in a lower window.
+* Add more photos of each experience, photos, pricing etc in a lower window. *(DONE)*
 
 ## Technical Stuff
 
-This project is done using BackboneJS and the Google Maps API.
+This project is done using BackboneJS, Xola API and the Google Maps API.
+
+Map Icons Collection by Nicolas Mollet [http://mapicons.nicolasmollet.com/](http://mapicons.nicolasmollet.com) ![Logo](http://mapicons.nicolasmollet.com/wp-content/uploads/2011/03/miclogo-88x31.gif)
 
 ## Disclaimer
 
