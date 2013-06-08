@@ -16,6 +16,7 @@ A Screenshot
 * Better Icons, or icons per category *(DONE)*
 * If you're in the US, request your location and focus the maps on your state.
 * Add more photos of each experience, photos, pricing etc in a lower window. *(DONE)*
+* Better metrics and analytics via a custom library. Currently, there's minimal tracking in the heart of the code.
 
 ## Technical Stuff
 

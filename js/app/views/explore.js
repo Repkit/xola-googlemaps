@@ -49,6 +49,8 @@ var app = app || {};
             setTimeout(function() {
                 _this.eiv.resize();
             }, 1000);
+            
+            ga('send', { 'hitType': 'event', 'eventCategory': 'panel', 'eventAction': 'open', 'eventLabel': this.experience.get('name') });
         },
 
         close_panel: function(e) {
@@ -61,6 +63,8 @@ var app = app || {};
             setTimeout(function() {
                 _this.eiv.resize();
             }, 1000);
+            
+            ga('send', { 'hitType': 'event', 'eventCategory': 'panel', 'eventAction': 'close', 'eventLabel': this.experience.get('name') });
         },
 
         load_photos: function() {
@@ -80,6 +84,8 @@ var app = app || {};
                     $('.img-container').append(panel_html);
                 }
             });
+            
+            ga('send', { 'hitType': 'event', 'eventCategory': 'panel', 'eventAction': 'load_photos', 'eventLabel': this.experience.get('name') });
         },
 
         show_photos: function() {
@@ -95,6 +101,8 @@ var app = app || {};
             if (this.$explore_panel.height() > 0) {
                 this.$explore.css("bottom", this.$explore_panel.height());
             }
+
+            ga('send', { 'hitType': 'event', 'eventCategory': 'panel', 'eventAction': 'show_photos', 'eventLabel': this.experience.get('name') });
         },
 
         img_click: function(e) {
@@ -104,6 +112,8 @@ var app = app || {};
             var large_img = "http://xola.com" + elem.attr('data-original-url');
             var large_img_caption = elem.attr('title');
             this.eiv.render(large_img, large_img_caption);
+
+            ga('send', { 'hitType': 'event', 'eventCategory': 'panel', 'eventAction': 'show_photos', 'eventLabel': this.experience.get('name') });
         },
     });
 })(jQuery);

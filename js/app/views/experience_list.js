@@ -118,6 +118,7 @@ var app = app || {};
             // Init the lightbox checkout out flow
             // console.log('Init Xola Checkout XDM');
             xola.init();
+            ga('send', {'hitType': 'event', 'eventCategory': 'marker', 'eventAction': 'click','eventLabel': this.experience.get('name')});
         },
 
         hide_info: function() {
@@ -126,11 +127,9 @@ var app = app || {};
                 this.experienceView.close_panel(this);
                 this.experienceView.undelegateEvents();
             }
+
+            ga('send', { 'hitType': 'event', 'eventCategory': 'marker', 'eventAction': 'hide', 'eventLabel': 'hide_info' });
         },
-
-
-        show_detail: function() {
-        }
     });
 
 })(jQuery);
