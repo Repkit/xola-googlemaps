@@ -27,14 +27,13 @@ var app = app || {};
 
             var fetch = app.Experiences.fetch();
             fetch.then(function() {
-
+                $("#loading").slideUp();
                 _this.map = new google.maps.Map(document.getElementById('map_canvas'), options); // use of $ doesnt work
 
                 // For our experiences, let's plot them on the map
                 google.maps.event.addListenerOnce(_this.map, 'idle', function(){
                     var experience_view = new app.ExperienceListView({model: app.Experiences, map: _this.map});
                 });
-                $("#loading").slideUp();
             });
         }
     });
