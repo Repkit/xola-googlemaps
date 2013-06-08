@@ -3,7 +3,12 @@ var app = app || {};
 (function($){
 
     app.AppView = Backbone.View.extend({
-        el: $("#controls_container"),
+        el: $("#search"),
+
+        events: {
+            "click #search_btn": "find_coordinates",
+            "keypress #search_txt": "find_coordinates"
+        },
 
         initialize: function() {
 
@@ -44,6 +49,23 @@ var app = app || {};
                 google.maps.event.addListenerOnce(_this.map, 'idle', function(){
                     var experience_view = new app.ExperienceListView({model: app.Experiences, map: _this.map});
                 });
+            });
+        },
+
+        find_coordinates: function(e) {
+            if (e.which != 1 && e.which != 13) return;
+
+            var txt = encodeURIComponent($("#search_txt").val());
+            var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + txt + "&sensor=false";
+
+            var _this = this;
+            $.getJSON(url, function(data) {
+                // console.info(data);
+                var loc = data.results[0].geometry.location;
+                var formatted_address = data.results[0].formatted_address;
+                // console.info(loc, formatted_address);
+                _this.map.setCenter(new google.maps.LatLng(loc.lat, loc.lng));
+                _this.map.setZoom(9);
             });
         }
     });
