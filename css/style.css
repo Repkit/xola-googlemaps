@@ -27,8 +27,7 @@ body {
     top: 3px;
 }
 
-#search input,
-#search button {
+#search input {
     font-family: Roboto, Helvetica, sans-serif;
     /*box-shadow: -2px 2px 5px rgba(0,0,0,0.3),0 4px 15px -5px rgba(0,0,0,0.0);*/
     -webkit-border-radius: 2px 0 0 2px;
@@ -37,9 +36,21 @@ body {
     padding: 6px 16px;
 }
 
-#search input {
+#search input[type='text'],
+#search input[type='search'] {
     padding-left: 8px;
     padding-right: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3),0 4px 15px -5px rgba(0,0,0,0.3);
+
+    -webkit-transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+    -moz-transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+    -ms-transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+    -o-transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+    transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+}
+
+#search input[type=submit] {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
 #map_canvas {
