@@ -55,6 +55,7 @@ var app = app || {};
 
         close_panel: function(e) {
             this.$explore.removeClass('open').addClass('closed');
+            this.$explore_panel.empty();
             this.$explore_panel.removeClass('open').addClass('closed');
             this.$explore_panel.animate({height: "0px"});
             this.$explore.css("bottom", "");
@@ -70,6 +71,7 @@ var app = app || {};
         load_photos: function() {
             var compiled_template = _.template($("#panel_img").html());
             var that = this;
+            $('.img-container').empty();
             _.each(this.medias, function(k,v) {
                 if (k.type == "photo") {
                     var extn = k.src.match(/\.\w+$/);

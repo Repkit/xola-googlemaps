@@ -16,6 +16,7 @@ var app = app || {};
         },
 
         initialize: function() {
+            this.$el.empty(); // Remove any dom elements and event listeners
             this.$close = this.$('.close_btn');
             this.$map = this.$("#map_canvas");
         },
@@ -29,6 +30,7 @@ var app = app || {};
 
         show_map: function(e) {
             this.$close.hide();
+            this.$el.empty(); // Remove any dom elements and event listeners
             $("#map_canvas").fadeIn();
             $("#search").fadeIn();
             this.$el.fadeOut('fast');
