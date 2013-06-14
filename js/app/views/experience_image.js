@@ -30,6 +30,7 @@ var app = app || {};
         show_map: function(e) {
             this.$close.hide();
             $("#map_canvas").fadeIn();
+            $("#search").fadeIn();
             this.$el.fadeOut('fast');
             this.url = null;
         },

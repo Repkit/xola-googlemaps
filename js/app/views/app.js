@@ -14,6 +14,7 @@ var app = app || {};
 
             $("#explore_btn").hide();
             $("#explore_panel").hide();
+            $("#search").hide();
 
             var _this = this;
 
@@ -49,6 +50,8 @@ var app = app || {};
                 google.maps.event.addListenerOnce(_this.map, 'idle', function(){
                     var experience_view = new app.ExperienceListView({model: app.Experiences, map: _this.map});
                 });
+
+                $("#search").slideDown();
             });
         },
 

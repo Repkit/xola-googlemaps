@@ -111,6 +111,7 @@ var app = app || {};
             var elem = $("#" + e.currentTarget.id);
             var large_img = "http://xola.com" + elem.attr('data-original-url');
             var large_img_caption = elem.attr('title');
+            $("#search").fadeOut();
             this.eiv.render(large_img, large_img_caption);
 
             ga('send', { 'hitType': 'event', 'eventCategory': 'panel', 'eventAction': 'show_photos', 'eventLabel': this.experience.get('name') });
