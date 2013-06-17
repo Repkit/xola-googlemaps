@@ -44,8 +44,8 @@ var app = app || {};
             var wh = $(window).height();
             this.$el.height(wh);
             this.$el.html(this.tpl({img_original: this.url, caption: this.caption}));
-            this.$('img').animate({'height' : wh - $('#explore_panel').height()}, {duration: 800});
-            
+            this.$('img').animate({'height' : wh}, {duration: 800});
+
             this.$map.fadeOut();
             this.$el.fadeIn();
         }
