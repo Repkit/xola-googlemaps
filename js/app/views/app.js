@@ -52,6 +52,11 @@ var app = app || {};
                 });
 
                 $("#search").slideDown();
+
+                $.get('last_updated.txt', function(data) {
+                    var last_updated = data.replace(/Date:\s+/, 'Last Updated: ');
+                    $('div.last_updated').html(last_updated);
+                });
             });
         },
 

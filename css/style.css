@@ -61,7 +61,7 @@ footer {
     border: 1px solid #dedede;
     opacity: 0.8;
     font-size: 8pt;
-    font-family: Tahoma, Arial, sans-serif;
+    font-family: Menlo, Consolas, monospace;
 }
 
 footer.abs {
