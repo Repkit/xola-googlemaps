@@ -177,7 +177,7 @@ footer .footer-txt {
     margin-right: 25px;
 }
 
-@media (max-device-width: 480px) {  
+@media (max-device-width: 480px) {
 
     #explore_btn {
         height: 70px;
@@ -195,12 +195,14 @@ footer .footer-txt {
 }
 
 #explore_panel {
-    height: 0px;
+    height: 240px;
     width: 100%;
+    position: absolute;
+    bottom: -215px;
+    opacity: 0;
+
     background-color: white;
     margin-top: 0px;
-    position: absolute;
-    bottom: 0px;
     z-index: 1;
 
     -webkit-transition: height 0.4s cubic-bezier(0.3,0.3,0.4,0.9),top 0.1s linear,margin-top 0.1s linear;
