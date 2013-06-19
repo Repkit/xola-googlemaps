@@ -33,7 +33,7 @@ var app = app || {};
             return this;
         },
 
-        open_panel: function(e) {
+        open_panel: function() {
             var _this = this;
 
             this.show_photos();
@@ -53,7 +53,7 @@ var app = app || {};
             ga('send', { 'hitType': 'event', 'eventCategory': 'panel', 'eventAction': 'open', 'eventLabel': this.experience.get('name') });
         },
 
-        close_panel: function(e) {
+        close_panel: function() {
             var _this = this;
 
             this.$explore.removeClass('open').addClass('closed');
@@ -62,8 +62,6 @@ var app = app || {};
             this.$explore_panel.removeClass('open').addClass('closed');
             this.$explore_panel.animate({bottom: "-215px", opacity: 0}, {duration: 800, queue: false});
 
-
-            var _this = this;
             setTimeout(function() {
                 _this.eiv.resize();
             }, 1000);
@@ -75,9 +73,8 @@ var app = app || {};
             var compiled_template = _.template($("#panel_img").html());
             var that = this;
             $('.img-container').empty();
-            _.each(this.medias, function(k,v) {
-                if (k.type == "photo") {
-                    var extn = k.src.match(/\.\w+$/);
+            _.each(this.medias, function(k) {
+                if (k.type === "photo") {
                     var cache_img = 'http://xola.com/experiences/' + that.className + '/medias/' + k.id + "?width=260&height=200";
                     var panel_html = compiled_template({
                         exp_id: that.className,

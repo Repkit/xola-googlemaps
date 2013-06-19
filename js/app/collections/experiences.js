@@ -6,7 +6,7 @@ var app = app || {};
         model: app.Experience,
 
         // localStorage: new Backbone.LocalStorage('xola-maps'),
-       
+
         // TODO: Cache data in localStorage
         fetch: function() {
             var collection = this;
@@ -25,7 +25,7 @@ var app = app || {};
         all: function() {
             // We're interested in places that have pictures and a geo location
             return this.filter(function(t) {
-                return t.get('photo') && t.get('geo') && t.get('status') == 1;
+                return t.get('photo') && t.get('geo') && t.get('status') === 1;
             });
         },
 

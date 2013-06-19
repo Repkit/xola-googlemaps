@@ -1,0 +1,20 @@
+{
+  "name": "xola-googlemaps",
+  "version": "0.2.0",
+  "description": "Xola Google Maps Mashup",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:rushi/xola-googlemaps.git"
+  },
+  "author": "Rushi Vishavadia <rushi.v@gmail.com>",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "cd6f4dae7022418d6d0b94a564a042b832ac8041",
+  "dependencies": {
+    "jshint": "~2.1.3"
+  }
+}

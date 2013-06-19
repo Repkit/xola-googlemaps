@@ -1,10 +1,10 @@
 var app = app || {};
 
-(function($){
+(function(){
     'use strict';
 
     app.Experience = Backbone.Model.extend({
-        
+
         // localStorage: new Backbone.LocalStorage('xola-maps'),
 
         initialize: function() {
@@ -15,4 +15,4 @@ var app = app || {};
             this.destroy();
         }
     });
-})(jQuery);
+})();

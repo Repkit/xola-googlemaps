@@ -28,7 +28,7 @@ var app = app || {};
             this.resize();
         },
 
-        show_map: function(e) {
+        show_map: function() {
             this.$close.hide();
             this.$el.empty(); // Remove any dom elements and event listeners
             $("#map_canvas").fadeIn();
@@ -38,16 +38,18 @@ var app = app || {};
         },
 
         resize: function() {
-            if (!this.url) return;
-            // console.log('resizing', $('#explore_panel').height(), this.url);
+            if (!this.url) {
+                return;
+            }
 
             var wh = $(window).height();
             this.$el.height(wh);
             this.$el.html(this.tpl({img_original: this.url, caption: this.caption}));
-            if ($('#explore_panel').hasClass('closed'))
+            if ($('#explore_panel').hasClass('closed')) {
                 this.$('img').animate({'height' : wh}, {duration: 800});
-            else
-                this.$('img').animate({'height' : wh- $('#explore_panel').height()}, {duration: 800});
+            } else {
+                this.$('img').animate({'height' : wh - $('#explore_panel').height()}, {duration: 800});
+            }
 
             this.$map.fadeOut();
             this.$el.fadeIn();

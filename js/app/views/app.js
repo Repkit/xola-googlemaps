@@ -48,7 +48,7 @@ var app = app || {};
 
                 // For our experiences, let's plot them on the map
                 google.maps.event.addListenerOnce(_this.map, 'idle', function(){
-                    var experience_view = new app.ExperienceListView({model: app.Experiences, map: _this.map});
+                    new app.ExperienceListView({model: app.Experiences, map: _this.map});
                 });
 
                 $("#search").slideDown();
@@ -61,7 +61,9 @@ var app = app || {};
         },
 
         find_coordinates: function(e) {
-            if (e.which != 1 && e.which != 13) return;
+            if (e.which !== 1 && e.which !== 13) {
+                return;
+            }
 
             var txt = encodeURIComponent($("#search_txt").val());
             var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + txt + "&sensor=false";
