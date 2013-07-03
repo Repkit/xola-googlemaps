@@ -2,3 +2,4 @@ experiences.json
 experiences.formatted.json
 node_modules
 last_updated.txt
+build/
