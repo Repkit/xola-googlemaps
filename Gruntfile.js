@@ -19,6 +19,7 @@ module.exports = function(grunt) {
         nonull: true
       },
     },
+
     uglify: {
       options: {
         banner: '/*! Minified [<%= grunt.task.current.filesSrc.join(",") %>] on <%= grunt.template.today("yyyy-mm-dd HH:MM:ss") %> */\n'
@@ -34,6 +35,7 @@ module.exports = function(grunt) {
         nonull: true
       }
     },
+
     jshint: {
       // jshint options http://www.jshint.com/docs/
       options: {
@@ -62,7 +64,6 @@ module.exports = function(grunt) {
           fileTmpl: "<script src='%s'></script>\n",
         },
         files: {
-          // Target-specific file lists and/or options go here.
           'sample.html': "build/<%= vendor_dest_filename %>"
         },
       },
@@ -73,7 +74,6 @@ module.exports = function(grunt) {
           fileTmpl: "<script src='%s'></script>\n",
         },
         files: {
-          // Target-specific file lists and/or options go here.
           'sample.html': "build/<%= app_dest_filename %>"
         },
       },
