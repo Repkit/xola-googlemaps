@@ -99,6 +99,10 @@ module.exports = function(grunt) {
       }
     },
 
+    clean: {
+      cache: ['cache/*.js']
+    },
+
     // Vendor Library Definitions, in order
     vendor_src: ['js/lib/jquery*.js', 'js/lib/underscore*.js', 'js/lib/backbone*.js', 'js/lib/oms*', 'js/lib/jqueryui/jquery-ui-1.10.3.custom.min.js', 'js/lib/xola*'],
     // Application Code, in order
