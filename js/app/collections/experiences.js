@@ -2,37 +2,48 @@ var app = app || {};
 
 (function($) {
 
-    var ExperiencesCollection = Backbone.Collection.extend({
+    app.ExperiencesCollection = Backbone.Collection.extend({
+
         model: app.Experience,
 
-        // localStorage: new Backbone.LocalStorage('xola-maps'),
+        initialize : function(opts) {
+            _.bindAll(this);
+            this.url = rootDomain + '/api/experiences?limit=100&' + $.param(opts.coords);
+            this.nextUri = null;
+            console.log('Fetching from', this.url);
+            this.fetchPage();
+        },
 
-        // TODO: Cache data in localStorage
-        fetch: function() {
-            var collection = this;
-            return $.getJSON('experiences.json', function(data) {
-                var valid_experiences = [];
-                $.each(data, function(k, v) {
-                    if (v.photo && v.geo) {
-                        valid_experiences.push(new app.Experience(v));
-                    }
-                });
-
-                collection.reset(valid_experiences);
+        fetchPage : function() {
+            if (this.nextUri) {
+                this.url = rootDomain + this.nextUri;
+            }
+            this.fetch({
+                success : this.success,
+                dataType: 'jsonp',
+                remove : false
             });
         },
 
-        all: function() {
-            // We're interested in places that have pictures and a geo location
-            return this.filter(function(t) {
-                return t.get('photo') && t.get('geo') && t.get('status') === 1;
-            });
+        parse : function(resp, options) {
+            if(resp.paging && resp.data) {
+                this.nextUri = resp.paging.next;
+                return resp.data;
+            }
+
+            return resp;
+        },
+
+        success : function(collection, response, options) {
+            if (this.nextUri) {
+                this.fetchPage();
+            } else {
+                console.log('No more left');
+            }
         },
 
         comparator: function(e) {
             return e.get('name'); // sort by name
         }
     });
-
-    app.Experiences = new ExperiencesCollection();
 })(jQuery);

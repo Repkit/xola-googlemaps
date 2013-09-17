@@ -4,15 +4,8 @@ var app = app || {};
     'use strict';
 
     app.Experience = Backbone.Model.extend({
-
-        // localStorage: new Backbone.LocalStorage('xola-maps'),
-
-        initialize: function() {
-            // console.log('Initialized models.e', this.get('name'));
-        },
-
-        clear: function() {
-            this.destroy();
+        isMappable : function() {
+            return this.get('photo') && this.get('geo') && this.get('complete') == true;
         }
     });
 })();

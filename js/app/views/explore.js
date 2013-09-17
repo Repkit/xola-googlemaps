@@ -1,118 +1,121 @@
 var app = app || {};
 
 (function($){
-
     app.ExploreView = Backbone.View.extend({
-        wrapper: _.template($("#explore_markup").html()),
+        template : '#exploreContentTpl',
 
         events: {
-            'click .explore_btn.closed' : 'open_panel',
-            'click .explore_btn.open' : 'close_panel',
-            'click .img-container img' : 'img_click',
+            'click .explore-btn.closed' : 'openPanel',
+            'click .explore-btn.open' : 'closePanel',
+            'click .img-container img' : 'clickImg'
         },
 
-        initialize: function() {
-            // console.log('init ExploreView', this.$el);
-
-            this.experience = this.options.e;
+        initialize : function() {
+            this.experience = this.options.experience;
             this.medias = this.experience.get('medias');
             this.className = this.experience.get('id');
-            this.eiv = new app.ExperienceImageView({el: $('#large_img')}); // initialize
-
-            return this.render();
+            this.currentExperienceImageView = null;
         },
 
-        render: function() {
-            this.$el.html(this.wrapper({className: this.className}));
+        render : function() {
+            // this.$el.append(_.template($(this.template).html()));
 
-            var _tmp_class = "." + this.className;
-            this.$explore = this.$(_tmp_class + ' .explore_btn');
-            this.$explore_panel = this.$(_tmp_class+ ' .explore_panel');
-            this.load_photos(); // Start pre-loading photos
+            var tpl = _.template($(this.template).html());
 
-            return this;
+            this.$explore = this.$el.find("#explore");
+            this.$largeImg = this.$el.parent().parent();
+            this.$el.append(tpl({className: this.className}));
+
+            this.$exploreBtn = this.$('.explore-btn');
+            this.$explorePanel = this.$('#explore-panel');
+
+            this.loadPhotos();
         },
 
-        open_panel: function() {
-            var _this = this;
-
-            this.show_photos();
-
-            this.$explore.animate({bottom: '240px'}, {duration: 800, queue: false});
-            this.$explore_panel.animate({bottom: "0px", opacity: 1}, {duration: 800, queue: false});
-
-            this.$explore.addClass('open').removeClass('closed');
-            this.$explore_panel.addClass('open').removeClass('closed');
-
-            this.$explore.fadeIn();
-
-            setTimeout(function() {
-                _this.eiv.resize();
-            }, 1000);
-
-            ga('send', { 'hitType': 'event', 'eventCategory': 'panel', 'eventAction': 'open', 'eventLabel': this.experience.get('name') });
-        },
-
-        close_panel: function() {
-            var _this = this;
-
-            this.$explore.removeClass('open').addClass('closed');
-            this.$explore.animate({bottom: "25px"}, {duration: 800, queue: false});
-
-            this.$explore_panel.removeClass('open').addClass('closed');
-            this.$explore_panel.animate({bottom: "-215px", opacity: 0}, {duration: 800, queue: false});
-
-            setTimeout(function() {
-                _this.eiv.resize();
-            }, 1000);
-
-            ga('send', { 'hitType': 'event', 'eventCategory': 'panel', 'eventAction': 'close', 'eventLabel': this.experience.get('name') });
-        },
-
-        load_photos: function() {
-            var compiled_template = _.template($("#panel_img").html());
-            var that = this;
-            $('.img-container').empty();
+        loadPhotos : function() {
+            var self = this;
+            this.$el.find('.img-container').empty();
             _.each(this.medias, function(k) {
-                if (k.type === "photo") {
-                    var cache_img = 'http://xola.com/experiences/' + that.className + '/medias/' + k.id + "?width=260&height=200";
-                    var panel_html = compiled_template({
-                        exp_id: that.className,
-                        img_id: k.id,
-                        original_url: k.src,
-                        panel_img: cache_img,
-                        caption: k.caption || ''
+                if (k.type === 'photo') {
+                    var cacheImg = rootImageDomain + '/experiences/' + self.className + '/medias/' + k.id + "?width=260&height=200";
+                    var imagePreviewView = new app.ImagePreviewView({
+                        imageId : k.id,
+                        experienceId : self.className,
+                        relativeSrc : k.src,
+                        absoluteSrc : cacheImg,
+                        caption : k.caption
                     });
-                    $('.img-container').append(panel_html);
+                    self.$el.find('.img-container').append(imagePreviewView.el);
+                    imagePreviewView.render();
                 }
             });
 
             ga('send', { 'hitType': 'event', 'eventCategory': 'panel', 'eventAction': 'load_photos', 'eventLabel': this.experience.get('name') });
         },
 
-        show_photos: function() {
+        openPanel : function() {
+            var self = this;
+            this.showPhotos();
+
+            //console.debug('Panel2:', this.$explorePanel.attr('class'));
+
+            this.$exploreBtn.animate({bottom: '240px'}, {duration: 800, queue: false});
+            this.$exploreBtn.addClass('open').removeClass('closed');
+
+            this.$explorePanel.animate({bottom: "0px", opacity: 1}, {duration: 800, queue: false});
+            this.$explorePanel.addClass('open').removeClass('closed');
+
+            this.$exploreBtn.fadeIn();
+
+            //console.debug('Panel3:', this.$explorePanel.attr('class'));
+
+            if (this.currentExperienceImageView) {
+                this.currentExperienceImageView.resize();
+            }
+
+            ga('send', { 'hitType': 'event', 'eventCategory': 'panel', 'eventAction': 'open', 'eventLabel': this.experience.get('name') });
+
+        },
+
+        closePanel : function() {
+            var self = this;
+
+            this.$exploreBtn.removeClass('open').addClass('closed');
+            this.$exploreBtn.animate({bottom: "25px"}, {duration: 500, queue: false});
+
+            this.$explorePanel.removeClass('open').addClass('closed');
+            this.$explorePanel.animate({bottom: "-215px", opacity: 0}, {duration: 500, queue: false});
+
+            if (this.currentExperienceImageView) {
+                this.currentExperienceImageView.resize('full');
+            }
+
+            ga('send', { 'hitType': 'event', 'eventCategory': 'panel', 'eventAction': 'close', 'eventLabel': this.experience.get('name') });
+        },
+
+        showPhotos : function() {
             var totalWidth = 0;
-            _.each($('.img-container img'), function(k) {
+            var images = this.$el.find('.img-container img');
+            _.each(images, function(k) {
                 totalWidth += k.clientWidth + 1;
             });
 
-            if (totalWidth > $("#explore").width()) {
-                $("#explore_panel .explore_panel_container .img-container").width(totalWidth * 1.5);
+            if (totalWidth > this.$explore.width()) {
+                $("#explore-panel .explore-panel-container .img-container").width(totalWidth * 1.5);
             }
 
             ga('send', { 'hitType': 'event', 'eventCategory': 'panel', 'eventAction': 'show_photos', 'eventLabel': this.experience.get('name') });
         },
 
-        img_click: function(e) {
-            // console.info(e.currentTarget.src, e.currentTarget.id);
-
-            var elem = $("#" + e.currentTarget.id);
-            var large_img = "http://xola.com" + elem.attr('data-original-url');
-            var large_img_caption = elem.attr('title');
-            $("#search").fadeOut();
-            this.eiv.render(large_img, large_img_caption);
-
-            ga('send', { 'hitType': 'event', 'eventCategory': 'panel', 'eventAction': 'show_photos', 'eventLabel': this.experience.get('name') });
-        },
+        clickImg : function(e) {
+            var elem = this.$el.find('#' + e.currentTarget.id);
+            $('#search').fadeOut('fast');
+            this.currentExperienceImageView = new app.ExperienceImageView({
+                url : elem.attr('data-original-url'),
+                caption : elem.attr('title')
+            });
+            this.$largeImg.find('#large-img').empty().append(this.currentExperienceImageView.el);
+            this.currentExperienceImageView.render();
+        }
     });
 })(jQuery);

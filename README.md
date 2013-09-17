@@ -14,7 +14,7 @@ A Screenshot
 
 * Filter by category (Trekking, Hiking, Road Climbing etc.)
 * Better Icons, or icons per category *(DONE)*
-* If you're in the US, request your location and focus the maps on your state.
+* If you're in the US, request your location and focus the maps on your state. *(DONE)*
 * Add more photos of each experience, photos, pricing etc in a lower window. *(DONE)*
 * Better metrics and analytics via a custom library. Currently, there's minimal tracking in the heart of the code.
 

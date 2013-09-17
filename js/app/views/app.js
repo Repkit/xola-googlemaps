@@ -3,83 +3,72 @@ var app = app || {};
 (function($){
 
     app.AppView = Backbone.View.extend({
-        el: $("#search"),
+        template : '#mainTpl',
 
+        // Click events for the search button to be moved
         events: {
-            "click #search_btn": "find_coordinates",
-            "keypress #search_txt": "find_coordinates"
+            "click #search-btn": "findCoordinates",
+            "keypress #search-txt": "findCoordinates"
         },
 
         initialize: function() {
+            console.debug('init');
+            this.$el.append(_.template($(this.template).html()));
+            $('body').append(this.el);
 
-            $("#explore_btn").hide();
-            $("#explore_panel").hide();
-            $("#search").hide();
+            this.render();
+        },
 
-            var _this = this;
+        render : function() {
+            var self = this;
 
-            // Let's setup the map
-            var styles = [{
-                elementType: "geometry",
-                stylers: [{ lightness: 23 }, { saturation: -10 }]
-            }];
+            var mapView = new app.MapView();
+            mapView.render();
 
-            var options = {
-                zoom: 5,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                center: new google.maps.LatLng(38.472024, -96.183594), // Top/Bottom, Left/Right
-                disableDefaultUI: true,
-                zoomControl: true,
-                mapTypeControl: true,
-                zoomControlOptions: {
-                    style: google.maps.ZoomControlStyle.DEFAULT,
-                    position: google.maps.ControlPosition.TOP_RIGHT
-                },
-                mapTypeControlOptions: {
-                    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-                },
-                styles: styles
-            };
+            mapView.on('load:first', function() {
+                var geo = mapView.coords.geo.split(',');
+                mapView.map = new google.maps.Map(document.getElementById("map-canvas"));
+                mapView.map.setCenter(new google.maps.LatLng(geo[0], geo[1]));
+                mapView.map.setZoom(10);
+                mapView.map.setOptions(mapView.options);
+                mapView.setMarkers();
 
-            var fetch = app.Experiences.fetch();
-            fetch.then(function() {
-                $("#loading").slideUp();
-                _this.map = new google.maps.Map(document.getElementById('map_canvas'), options); // use of $ doesnt work
-
-                // For our experiences, let's plot them on the map
-                google.maps.event.addListenerOnce(_this.map, 'idle', function(){
-                    new app.ExperienceListView({model: app.Experiences, map: _this.map});
-                });
-
-                $("#search").slideDown();
-
-                $.get('last_updated.txt', function(data) {
-                    var last_updated = data.replace(/Date:\s+/, 'Last Updated: ');
-                    $('div.last_updated').html(last_updated);
-                });
+                self.$el.find("#loading").fadeOut();
+                self.$el.find("#search").fadeIn();
+                self.map = mapView.map;
             });
         },
 
-        find_coordinates: function(e) {
+        findCoordinates : function(e) {
             if (e.which !== 1 && e.which !== 13) {
                 return;
             }
+            console.debug('clicked');
 
-            var txt = encodeURIComponent($("#search_txt").val());
+            var txt = encodeURIComponent($("#search-txt").val());
             var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + txt + "&sensor=false";
 
             ga('send', {'hitType': 'event', 'eventCategory': 'search', 'eventAction': 'click','eventLabel': txt});
 
-            var _this = this;
+            var self = this;
             $.getJSON(url, function(data) {
                 // console.info(data);
                 var loc = data.results[0].geometry.location;
                 var formatted_address = data.results[0].formatted_address;
                 ga('send', {'hitType': 'event', 'eventCategory': 'search', 'eventAction': 'success','eventLabel': formatted_address});
-                // console.info(loc, formatted_address);
-                _this.map.setCenter(new google.maps.LatLng(loc.lat, loc.lng));
-                _this.map.setZoom(9);
+
+                var bounds = data.results[0].geometry.viewport;
+
+                var boundsSW = new google.maps.LatLng(bounds.southwest.lat, bounds.southwest.lng);
+                var boundsNE = new google.maps.LatLng(bounds.northeast.lat, bounds.northeast.lng);
+
+                var latBounds = new google.maps.LatLngBounds(boundsSW, boundsNE);
+                console.debug('Lat Bounds', latBounds);
+
+                self.map.fitBounds(latBounds);
+                self.map.setCenter(new google.maps.LatLng(loc.lat, loc.lng));
             });
+
         }
     });
 })(jQuery);
