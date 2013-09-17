@@ -3,29 +3,38 @@ var app = app || {};
 (function($) {
 
     var ExperiencesCollection = Backbone.Collection.extend({
+
         model: app.Experience,
 
-        // localStorage: new Backbone.LocalStorage('xola-maps'),
+        init: function() {
+            this.collection = []
+        },
 
         // TODO: Cache data in localStorage
         fetch: function() {
-            var collection = this;
-            return $.getJSON('experiences.json', function(data) {
-                var valid_experiences = [];
-                $.each(data, function(k, v) {
-                    if (v.photo && v.geo) {
-                        valid_experiences.push(new app.Experience(v));
-                    }
-                });
+            this.init();
+            var self = this;
 
-                collection.reset(valid_experiences);
+            return $.ajax({
+                type: 'GET',
+                url : rootDomain + '/experiences',
+                dataType : 'jsonp',
+                jsonpCallback: 'processExperiences',
+                success : function(data) {
+                    _.each(data, function(e) {
+                        self.collection.push(new app.Experience(e));
+                    })
+                },
+                error: function(e) {
+                    console.warn(e, e.message);
+                }
             });
         },
 
         all: function() {
-            // We're interested in places that have pictures and a geo location
-            return this.filter(function(t) {
-                return t.get('photo') && t.get('geo') && t.get('status') === 1;
+            // We're interested in completed experiences that have pictures and a geo location
+            return this.collection.filter(function(t) {
+                return t.get('photo') && t.get('geo') && t.get('complete') == true;
             });
         },
 

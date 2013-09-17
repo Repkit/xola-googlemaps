@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto:300,400,600,700" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css" rel="stylesheet" />
 
+    <script type='text/javascript'>
+        var rootDomain = 'http://penguin.xola.com';
+    </script>
+
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="js/lib/jquery.min.js"></script>
     <script src="js/lib/underscore-min.js"></script>
@@ -124,7 +128,7 @@
     var co = document.createElement('script');
     co.type = 'text/javascript';
     co.async = true;
-    co.src = 'http://xola.com/checkout.js';
+    co.src = rootDomain + '/checkout.js';
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(co, s);
     })();

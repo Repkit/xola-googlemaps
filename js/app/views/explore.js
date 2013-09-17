@@ -75,7 +75,7 @@ var app = app || {};
             $('.img-container').empty();
             _.each(this.medias, function(k) {
                 if (k.type === "photo") {
-                    var cache_img = 'http://xola.com/experiences/' + that.className + '/medias/' + k.id + "?width=260&height=200";
+                    var cache_img = rootDomain + '/experiences/' + that.className + '/medias/' + k.id + "?width=260&height=200";
                     var panel_html = compiled_template({
                         exp_id: that.className,
                         img_id: k.id,
@@ -107,7 +107,7 @@ var app = app || {};
             // console.info(e.currentTarget.src, e.currentTarget.id);
 
             var elem = $("#" + e.currentTarget.id);
-            var large_img = "http://xola.com" + elem.attr('data-original-url');
+            var large_img = rootDomain + elem.attr('data-original-url');
             var large_img_caption = elem.attr('title');
             $("#search").fadeOut();
             this.eiv.render(large_img, large_img_caption);

@@ -91,7 +91,7 @@ var app = app || {};
             });
 
             var _tpl = _.template($("#marker_info").html());
-            var cache_img = 'http://xola.com/experiences/' + obj.get('id') + '/medias/' + obj.get('photo').id + '?width=260&height=200';
+            var cache_img = rootDomain + '/experiences/' + obj.get('id') + '/medias/' + obj.get('photo').id + '?width=260&height=200';
             var jsonObj = obj.toJSON();
             jsonObj.cache_img = cache_img;
             marker.InfoWindow = new google.maps.InfoWindow({
