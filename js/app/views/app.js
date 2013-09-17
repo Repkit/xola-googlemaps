@@ -16,7 +16,7 @@ var app = app || {};
             $("#explore_panel").hide();
             $("#search").hide();
 
-            var _this = this;
+            var self = this;
 
             // Let's setup the map
             var styles = [{
@@ -27,7 +27,7 @@ var app = app || {};
             var options = {
                 zoom: 5,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
-                center: new google.maps.LatLng(38.472024, -96.183594), // Top/Bottom, Left/Right
+                center: new google.maps.LatLng(38.472024, -96.183594), // Center of the US
                 disableDefaultUI: true,
                 zoomControl: true,
                 mapTypeControl: true,
@@ -41,14 +41,37 @@ var app = app || {};
                 styles: styles
             };
 
-            var fetch = app.Experiences.fetch();
+            // By default set fixed Geo-cordinates of Mountain View, CA
+            // long, lat
+            var coords = { geo: "37.413114,-122.070336" };
+            if (navigator.geolocation) {
+                // We have the user's Geo Location - let's center the map around that area
+                navigator.geolocation.getCurrentPosition(
+                    function(pos) {
+                        console.debug(pos);
+                        //coords = { geo: pos.coords.longitude + "," + pos.coords.latitude  };
+                    },
+                    function(e) {
+                        console.warn(e);
+                    }
+                );
+            }
+
+            var experiencesCollection = new app.ExperiencesCollection();
+            var fetch = experiencesCollection.fetch(coords);
+
             fetch.then(function() {
+                self.map = new google.maps.Map(document.getElementById('map_canvas'), options); // use of $ doesnt work
+
                 $("#loading").slideUp();
-                _this.map = new google.maps.Map(document.getElementById('map_canvas'), options); // use of $ doesnt work
+                var geo = coords.geo.split(',');
+                self.map.setCenter(new google.maps.LatLng(geo[0], geo[1]));
+                self.map.setZoom(7);
 
                 // For our experiences, let's plot them on the map
-                google.maps.event.addListenerOnce(_this.map, 'idle', function(){
-                    new app.ExperienceListView({model: app.Experiences, map: _this.map});
+                google.maps.event.addListenerOnce(self.map, 'idle', function(){
+                    var elView = new app.ExperienceListView({collection: experiencesCollection, map: self.map});
+                    elView.listenTo(experiencesCollection, 'change', elView.renderAll);
                 });
 
                 $("#search").slideDown();
@@ -70,15 +93,15 @@ var app = app || {};
 
             ga('send', {'hitType': 'event', 'eventCategory': 'search', 'eventAction': 'click','eventLabel': txt});
 
-            var _this = this;
+            var self = this;
             $.getJSON(url, function(data) {
                 // console.info(data);
                 var loc = data.results[0].geometry.location;
                 var formatted_address = data.results[0].formatted_address;
                 ga('send', {'hitType': 'event', 'eventCategory': 'search', 'eventAction': 'success','eventLabel': formatted_address});
                 // console.info(loc, formatted_address);
-                _this.map.setCenter(new google.maps.LatLng(loc.lat, loc.lng));
-                _this.map.setZoom(9);
+                self.map.setCenter(new google.maps.LatLng(loc.lat, loc.lng));
+                self.map.setZoom(9);
             });
         }
     });

@@ -56,26 +56,32 @@ var app = app || {};
 
         initialize: function(opts) {
             this.map = opts.map;
-            this.model = opts.model;
+            this.collection = opts.collection;
             this.oms = new OverlappingMarkerSpiderfier(this.map);
+            this.markers = [];
             this.renderAll();
         },
 
         renderAll: function() {
-            var _this = this;
-            _.map(this.model.all(), this.renderMarker, this);
+            var self = this;
+            _.map(this.collection.all(), this.renderMarker, this);
 
             this.oms.addListener('click', function(marker) {
-                _this.show_info.call(marker);
+                self.show_info.call(marker);
             });
 
             this.oms.addListener('spiderfy', function(markers) {
-                _.invoke(markers, _this.hide_info);
+                _.invoke(markers, self.hide_info);
             });
         },
 
         renderMarker: function(obj) {
             var that = this;
+
+            // If this experience was already plotted, return early
+            if (this.exists(obj.get('id'))) {
+                return;
+            }
 
             var current_marker_img = this.marker_img[obj.get('category')] ? this.marker_img[obj.get('category')] : 'blank';
             current_marker_img = 'images/markers/' + current_marker_img + ".png?r=3";
@@ -89,6 +95,7 @@ var app = app || {};
                 descr : obj.get('excerpt'),
                 id : obj.get('id')
             });
+            this.markers.push(marker);
 
             var _tpl = _.template($("#marker_info").html());
             var cache_img = rootDomain + '/experiences/' + obj.get('id') + '/medias/' + obj.get('photo').id + '?width=260&height=200';
@@ -119,6 +126,23 @@ var app = app || {};
             // console.log('Init Xola Checkout XDM');
             xola.init();
             ga('send', {'hitType': 'event', 'eventCategory': 'marker', 'eventAction': 'click','eventLabel': this.experience.get('name')});
+        },
+
+        clear: function() {
+            _.each(this.markers, function(marker) {
+                marker.setMap(null);
+            })
+        },
+
+        exists: function(id) {
+            var exists = false;
+            _.each(this.markers, function(marker) {
+                if (marker.experience.get('id') == id) {
+                    exists = true;
+                }
+            });
+
+            return exists;
         },
 
         hide_info: function() {

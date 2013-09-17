@@ -2,28 +2,46 @@ var app = app || {};
 
 (function($) {
 
-    var ExperiencesCollection = Backbone.Collection.extend({
+    app.ExperiencesCollection = Backbone.Collection.extend({
 
         model: app.Experience,
 
-        init: function() {
+        initialize: function() {
             this.collection = []
         },
 
         // TODO: Cache data in localStorage
-        fetch: function() {
-            this.init();
-            var self = this;
+        fetch: function(params) {
+            var endpoint = '/api/experiences?limit=100&' + jQuery.param(params);
 
+            // Fetch the first batch of experiences
+            return this.fetchOne(endpoint);
+        },
+
+        fetchOne: function(endpoint) {
+            var self = this;
+            endpoint = endpoint || '/api/experiences';
+
+            var url = rootDomain + endpoint;
+            //console.debug(endpoint);
             return $.ajax({
                 type: 'GET',
-                url : rootDomain + '/experiences',
+                url : url,
                 dataType : 'jsonp',
+                cache: false,
                 jsonpCallback: 'processExperiences',
-                success : function(data) {
-                    _.each(data, function(e) {
+                success : function(resp) {
+                    //console.debug(resp.paging, resp.data.length);
+
+                    var experienceList = resp.data;
+                    _.each(experienceList, function(e) {
                         self.collection.push(new app.Experience(e));
-                    })
+                    });
+
+                    self.trigger('change', self.all());
+                    if (resp.paging && resp.paging.next) {
+                        return self.fetchOne(resp.paging.next);
+                    }
                 },
                 error: function(e) {
                     console.warn(e, e.message);
@@ -42,6 +60,4 @@ var app = app || {};
             return e.get('name'); // sort by name
         }
     });
-
-    app.Experiences = new ExperiencesCollection();
 })(jQuery);

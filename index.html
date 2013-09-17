@@ -10,6 +10,7 @@
 
     <script type='text/javascript'>
         var rootDomain = 'http://penguin.xola.com';
+        var rootDomain = 'http://xola.local';
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
@@ -36,7 +37,7 @@
     </div>
     <div id="search">
         <div class="search_wrapper input-append">
-            <input class="span3" id="search_txt" type="search" placeholder="Where are you going?" value="San Francisco" name="search" />
+            <input class="span3" id="search_txt" type="search" placeholder="Where are you going?" value="San Francisco Bay" name="search" />
             <!-- <input class="btn icon-search" type="submit" id="search_btn" value="" /> -->
             <a class="btn" id="search_btn" href="#">
                 <i class="icon-search"></i>
@@ -130,7 +131,7 @@
     co.async = true;
     co.src = rootDomain + '/checkout.js';
     var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(co, s);
+    //s.parentNode.insertBefore(co, s);
     })();
     </script>
 </body>
