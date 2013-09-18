@@ -74,7 +74,7 @@ var app = app || {};
                 // We have the user's Geo Location - let's center the map around that area
                 navigator.geolocation.getCurrentPosition(
                     function(pos) {
-                        //self.coords = { geo: pos.coords.latitude + "," + pos.coords.longitude };
+                        self.coords = { geo: pos.coords.latitude + "," + pos.coords.longitude };
                     },
                     function(e) {
                         console.warn(e);
@@ -112,6 +112,8 @@ var app = app || {};
             var self = this;
 
             this.oms = new OverlappingMarkerSpiderfier(this.map);
+            var geo = this.coords.geo.split(',');
+            this.map.panTo(new google.maps.LatLng(geo[0], geo[1]));
 
             // For every point received, put it on the map
             this.listenTo(this.collection, 'add', function(experience) {
