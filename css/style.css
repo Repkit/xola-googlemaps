@@ -74,7 +74,7 @@ footer .footer-txt {
     padding: 0px 6px;
 }
 
-#map_canvas {
+#map-canvas {
     z-index: -1;
     position: absolute;
     top: 0;
@@ -83,7 +83,7 @@ footer .footer-txt {
     height: 100%;
 }
 
-#map_canvas h3 {
+#map-canvas h3 {
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-weight: normal;
     line-height: 32px;
@@ -91,18 +91,18 @@ footer .footer-txt {
     margin-bottom: 0;
 }
 
-#map_canvas p.excerpt {
+#map-canvas p.excerpt {
     font-size: 12px;
     font-family: Roboto, Helvetica, Arial, sans-serif;
     line-height: 16px;
 }
 
-#map_canvas .desc-wrapper {
+#map-canvas .desc-wrapper {
     padding-right: 5px;
     line-height: 18px;
 }
 
-#map_canvas .desc-wrapper img {
+#map-canvas .desc-wrapper img {
     float: left;
     width: 260px;
     height: 200px;
@@ -111,7 +111,7 @@ footer .footer-txt {
     box-shadow: 1px 1px 2px #666;
 }
 
-#map_canvas div.misc p {
+#map-canvas div.misc p {
     margin-bottom: 5px;
 }
 
@@ -124,7 +124,7 @@ footer .footer-txt {
     z-index: 1;
 }
 
-#explore_btn {
+#explore-btn {
     cursor: pointer;
     height: 30px;
     width: 170px;
@@ -145,11 +145,11 @@ footer .footer-txt {
     transform: translateZ(0);
 }
 
-#explore_btn label {
+#explore-btn label {
     margin-bottom: 0px;
 }
 
-#explore_btn.open {
+#explore-btn.open {
     bottom: 171px;
     box-shadow: -1px -1px 2px 0px rgba(0,0,0,0.1),1px -1px 2px 0px rgba(0,0,0,0.1);
     z-index: 2;
@@ -173,7 +173,7 @@ footer .footer-txt {
     background-position: -15px -15px;
 }
 
-.explore_label {
+.explore-label {
     background: #fff url(../images/explore_sprite.png) no-repeat 6px 2px;
     text-align: right;
     margin-right: 25px;
@@ -181,13 +181,13 @@ footer .footer-txt {
 
 @media (max-device-width: 480px) {
 
-    #explore_btn {
+    #explore-btn {
         height: 70px;
         width: 170px;
         bottom: 40px;
     }
 
-    #explore_btn label {
+    #explore-btn label {
         font-size: 22px;
     }
 
@@ -196,7 +196,7 @@ footer .footer-txt {
     }
 }
 
-#explore_panel {
+#explore-panel {
     height: 240px;
     width: 100%;
     position: absolute;
@@ -215,16 +215,16 @@ footer .footer-txt {
     border-top: 2px solid white;
 }
 
-#explore_panel.open {
+#explore-panel.open {
     z-index: 1;
 }
 
-#explore_panel.closed {
+#explore-panel.closed {
     z-index: 5;
 }
 
 
-#explore_panel .explore_panel_container {
+#explore-panel .explore-panel-container {
     margin: 10px;
     padding-bottom: 5px;
     overflow: auto;
@@ -248,16 +248,15 @@ footer .footer-txt {
     box-shadow: 1px 1px 2px #000;
 }
 
-#large_img {
-    display: none;
+#large-img {
     background-color: #222;
 }
 
-#large_img .large_img_wrapper {
+#large-img .large-img-wrapper {
     margin: 0 auto;
 }
 
-#large_img .large_img_wrapper .caption {
+#large-img .large-img-wrapper .caption {
     font-family: Roboto, Helvetica, sans-serif;
     position: relative;
     top: -43px;
@@ -268,7 +267,7 @@ footer .footer-txt {
     width: 99%;
 }
 
-.close_btn {
+.close-btn {
     background: transparent url("../images/close_48.png") no-repeat 2px 2px;
     cursor: pointer;
     height: 52px;
@@ -280,7 +279,7 @@ footer .footer-txt {
     display: block;
 }
 
-.close_btn:hover {
+.close-btn:hover {
     border-radius: 50px;
     background-color: #555;
     opacity: 0.7;
@@ -324,4 +323,9 @@ footer .footer-txt {
 .xola-custom:active {
     position:relative;
     top:1px;
+}
+
+/** FIX for Bootstrap and Google Maps Info window styes problem **/
+img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
+    max-width: none;
 }

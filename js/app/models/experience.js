@@ -4,12 +4,8 @@ var app = app || {};
     'use strict';
 
     app.Experience = Backbone.Model.extend({
-
-        initialize: function() {
-        },
-
-        clear: function() {
-            this.destroy();
+        isMappable : function() {
+            return this.get('photo') && this.get('geo') && this.get('complete') == true;
         }
     });
 })();
