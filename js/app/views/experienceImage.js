@@ -35,6 +35,7 @@ var app = app || {};
 
         close: function() {
             // Remove the image
+            $('#search').fadeIn('fast');
             this.$el.find('img').animate({'opacity' : 0}, {duration: 800});
             this.$el.fadeOut();
             this.$el.empty(); // Remove any dom elements and event listeners

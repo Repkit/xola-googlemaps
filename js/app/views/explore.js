@@ -109,6 +109,7 @@ var app = app || {};
 
         clickImg : function(e) {
             var elem = this.$el.find('#' + e.currentTarget.id);
+            $('#search').fadeOut('fast');
             this.currentExperienceImageView = new app.ExperienceImageView({
                 url : elem.attr('data-original-url'),
                 caption : elem.attr('title')
