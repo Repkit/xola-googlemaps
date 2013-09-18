@@ -76,7 +76,7 @@ var app = app || {};
 
             var expCategory = experience.get('category').trim();
             var currentMarkerImg = this.markerImg[expCategory] ? this.markerImg[expCategory] : 'blank';
-            currentMarkerImg = 'images/markers/' + currentMarkerImg + ".png?r=" + Math.random();
+            currentMarkerImg = 'images/markers/' + currentMarkerImg + '.png';
             var marker = new google.maps.Marker({
                 map: self.map,
                 experience: experience,
