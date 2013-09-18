@@ -19,6 +19,10 @@ var app = app || {};
             "Bungee Jumping": '',
             "Caving / Spelunking": 'spelunking',
             "River Cruises": 'cruiseship',
+            "Ocean Cruises": 'cruiseship',
+            "Motor Yacht" : 'boat',
+            "Houseboats" : 'boat',
+            "Sleigh Riding" : 'sleigh',
             "Skydiving": 'diving',
             "Surfing": 'surfing',
             "Website Creation": '',
@@ -30,16 +34,17 @@ var app = app || {};
             "Creative Classes": '',
             "Snowshoeing": 'snowshoeing',
             "Windsurfing & Kitesurfing": 'kitesurfing',
-            "Art & Architecture": '',
+            "Art & Architecture": 'art',
             "Birdwatching": 'birds-2',
-            "Hang Gliding ": 'hanggliding',
-            "Wilderness Training": '',
+            "Hang Gliding": 'hanggliding',
+            "Wilderness Training": 'wild',
             "Ballooning": 'hotairbaloon',
             "Walking Tours": 'walkingtour',
             "Backpacking/Camping": 'camping-2',
-            "Culture & History": '',
-            "Eco-Tour/Hike": '',
-            "Marine Wildlife": '',
+            "Culture & History": 'history',
+            "Eco-Tour/Hike": 'hiking',
+            "Marine Wildlife": 'marine',
+            "Website Creation" : 'computer',
             "Snowmobiling": 'snowmobiling',
             "Wakeboarding": 'boardercross',
             "Zip-lining": 'ziplining',
@@ -50,7 +55,12 @@ var app = app || {};
             "Off-road": 'atv',
             "Helicopter Tours": 'helicopter',
             "Horseback Riding": 'horseriding',
-            "Rock Climbing": 'climbing'
+            "Rock Climbing": 'climbing',
+            "Skiing": 'skiing',
+            "Cross Country Skiing": 'cross_country_skiing',
+            "Film Screening": 'film',
+            "Scuba & Snorkeling": 'scubadiving',
+            "Music/Rafting festival" : 'music'
         },
 
         initialize : function(opts) {
@@ -64,8 +74,9 @@ var app = app || {};
                 return;
             }
 
-            var currentMarkerImg = this.markerImg[experience.get('category')] ? this.markerImg[experience.get('category')] : 'blank';
-            currentMarkerImg = 'images/markers/' + currentMarkerImg + ".png?r=3";
+            var expCategory = experience.get('category').trim();
+            var currentMarkerImg = this.markerImg[expCategory] ? this.markerImg[expCategory] : 'blank';
+            currentMarkerImg = 'images/markers/' + currentMarkerImg + ".png?r=" + Math.random();
             var marker = new google.maps.Marker({
                 map: self.map,
                 experience: experience,

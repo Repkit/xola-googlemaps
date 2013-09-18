@@ -1,0 +1,16 @@
+--2013-09-18 14:34:50--  http://mapicons.nicolasmollet.com/wp-content/uploads/mapicons/shape-default/color-9d7050/shapecolor-color/shadow-1/border-dark/symbolstyle-white/symbolshadowstyle-dark/gradient-no/ferry.png
+Resolving mapicons.nicolasmollet.com (mapicons.nicolasmollet.com)... 93.88.241.153
+Connecting to mapicons.nicolasmollet.com (mapicons.nicolasmollet.com)|93.88.241.153|:80... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: http://i.imgur.com/CrP9C.gif [following]
+--2013-09-18 14:34:51--  http://i.imgur.com/CrP9C.gif
+Resolving i.imgur.com (i.imgur.com)... 103.31.6.184, 103.31.7.31, 103.31.7.32, ...
+Connecting to i.imgur.com (i.imgur.com)|103.31.6.184|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 222 [image/gif]
+Saving to: `ferry.png'
+
+     0K                                                       100% 8.76M=0s
+
+2013-09-18 14:34:51 (8.76 MB/s) - `ferry.png' saved [222/222]
+

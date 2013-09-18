@@ -84,7 +84,7 @@ var app = app || {};
 
             var geo = this.coords.geo.split(',');
             this.options = {
-                zoom: 10,
+                zoom: 9,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 center: new google.maps.LatLng(geo[0], geo[1]), // Center of the US
                 disableDefaultUI: true,
