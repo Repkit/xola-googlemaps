@@ -57,7 +57,6 @@ var app = app || {};
             var self = this;
             this.showPhotos();
 
-            //console.debug('Panel2:', this.$explorePanel.attr('class'));
 
             this.$exploreBtn.animate({bottom: '240px'}, {duration: 800, queue: false});
             this.$exploreBtn.addClass('open').removeClass('closed');
@@ -67,7 +66,6 @@ var app = app || {};
 
             this.$exploreBtn.fadeIn();
 
-            //console.debug('Panel3:', this.$explorePanel.attr('class'));
 
             if (this.currentExperienceImageView) {
                 this.currentExperienceImageView.resize();

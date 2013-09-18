@@ -12,7 +12,6 @@ var app = app || {};
         },
 
         initialize: function() {
-            console.debug('init');
             this.$el.append(_.template($(this.template).html()));
             $('body').append(this.el);
 
@@ -43,7 +42,6 @@ var app = app || {};
             if (e.which !== 1 && e.which !== 13) {
                 return;
             }
-            console.debug('clicked');
 
             var txt = encodeURIComponent($("#search-txt").val());
             var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + txt + "&sensor=false";
@@ -52,7 +50,6 @@ var app = app || {};
 
             var self = this;
             $.getJSON(url, function(data) {
-                // console.info(data);
                 var loc = data.results[0].geometry.location;
                 var formatted_address = data.results[0].formatted_address;
                 ga('send', {'hitType': 'event', 'eventCategory': 'search', 'eventAction': 'success','eventLabel': formatted_address});
@@ -63,7 +60,6 @@ var app = app || {};
                 var boundsNE = new google.maps.LatLng(bounds.northeast.lat, bounds.northeast.lng);
 
                 var latBounds = new google.maps.LatLngBounds(boundsSW, boundsNE);
-                console.debug('Lat Bounds', latBounds);
 
                 self.map.fitBounds(latBounds);
                 self.map.setCenter(new google.maps.LatLng(loc.lat, loc.lng));

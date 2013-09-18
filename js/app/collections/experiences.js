@@ -10,7 +10,6 @@ var app = app || {};
             _.bindAll(this);
             this.url = rootDomain + '/api/experiences?limit=100&' + $.param(opts.coords);
             this.nextUri = null;
-            console.log('Fetching from', this.url);
             this.fetchPage();
         },
 
@@ -37,8 +36,6 @@ var app = app || {};
         success : function(collection, response, options) {
             if (this.nextUri) {
                 this.fetchPage();
-            } else {
-                console.log('No more left');
             }
         },
 

@@ -54,7 +54,6 @@ var app = app || {};
         },
 
         initialize : function(opts) {
-            console.debug('init mapview');
             this.markers = [];
         },
 
