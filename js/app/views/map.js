@@ -139,6 +139,7 @@ var app = app || {};
             this.exploreView = new app.ExploreView({experience: this.experience});
             $("#explore").append(this.exploreView.el);
             this.exploreView.render();
+            xola.init();
         },
 
         hideInfo : function() {
