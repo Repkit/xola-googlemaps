@@ -4,11 +4,11 @@
 
 This project plots Xola's Experiences onto Google Maps, allowing you to see the various experiences availaible to you. This fetches the list of experiences from xola.com and uses that as a source to plot against a full-scale USA map.
 
-A demo is [available here](http://rushi.vishavadia.com/xola-googlemaps/).
+A demo is [available here](http://rushi.vishavadia.com/xola/).
 
 A Screenshot
 
-![Screenshot](https://bitbucket.org/rushi/xola-googlemaps/raw/master/screenshot.png)
+![Screenshot](https://github.com/rushi/xola-googlemaps/raw/master/screenshot.png)
 
 ## Todo 
 
@@ -23,7 +23,3 @@ A Screenshot
 This project is done using BackboneJS, Xola API and the Google Maps API.
 
 Map Icons Collection by Nicolas Mollet [http://mapicons.nicolasmollet.com/](http://mapicons.nicolasmollet.com) ![Logo](http://mapicons.nicolasmollet.com/wp-content/uploads/2011/03/miclogo-88x31.gif)
-
-## Disclaimer
-
-This project isn't affiliated to Xola or endorsed by them.  
