@@ -8,7 +8,7 @@ var app = app || {};
 
         initialize : function(opts) {
             _.bindAll(this);
-            this.url = rootDomain + '/api/experiences?limit=100&' + $.param(opts.coords);
+            this.url = rootDomain + '/api/experiences?limit=100&' + $.param(opts.coords) + '&apiKey=' + apiKey;
             this.nextUri = null;
             this.fetchPage();
         },
